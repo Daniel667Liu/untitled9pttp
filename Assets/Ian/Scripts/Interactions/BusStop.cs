@@ -51,4 +51,10 @@ public class BusStop : Interaction
             }
         }
     }
+
+    [ExecuteInEditMode]
+    public void Test()
+    {
+        Debug.Log("hi hi");
+    }
 }

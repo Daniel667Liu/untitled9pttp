@@ -12,10 +12,15 @@ public class Jumper : Interaction
     private bool isInside;
     private float timer;
 
+    public GameObject canvas;
+    private CanvasControl canvasControl;
+
     // Start is called before the first frame update
     void Start()
     {
         anim = GetComponent<Animator>();
+        canvasControl = FindObjectOfType<CanvasControl>();
+
     }
 
     // Update is called once per frame
@@ -38,6 +43,11 @@ public class Jumper : Interaction
             {
                 // jump
                 anim.Play("jump");
+                if (!canvasControl.canvasInControl.Contains(canvas))
+                {
+                    canvasControl.canvasInControl.Add(canvas);
+                    canvas.SetActive(false);
+                }
             }
             else
             {

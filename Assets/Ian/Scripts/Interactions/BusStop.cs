@@ -13,10 +13,15 @@ public class BusStop : Interaction
     private bool isBright;
     private Animator anim;
 
+    public GameObject canvas;
+    private CanvasControl canvasControl;
+
     // Start is called before the first frame update
     void Start()
     {
         anim = GetComponent<Animator>();
+        canvasControl = FindObjectOfType<CanvasControl>();
+
     }
 
     // Update is called once per frame
@@ -26,6 +31,12 @@ public class BusStop : Interaction
 
         if (Input.GetKeyDown(key))
         {
+            if (!canvasControl.canvasInControl.Contains(canvas))
+            {
+                canvasControl.canvasInControl.Add(canvas);
+                canvas.SetActive(false);
+            }
+            
             if (isBright)
             {
                 lightObj.GetComponent<MeshRenderer>().material = dimMat;

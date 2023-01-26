@@ -9,13 +9,15 @@ public class Rooftop : Interaction
     private Animator anim;
     private int prevInd;
     private int correctCount;
-    
+    public GameObject canvas;
+    private CanvasControl canvasControl;
 
     // Start is called before the first frame update
     void Start()
     {
         anim = GetComponent<Animator>();
         prevInd = -2;
+        canvasControl = FindObjectOfType<CanvasControl>();
     }
 
     // Update is called once per frame
@@ -53,6 +55,12 @@ public class Rooftop : Interaction
         {
             anim.SetTrigger("flyAwaySad");
             correctCount = 0;
+            if (!canvasControl.canvasInControl.Contains(canvas)) 
+            {
+                canvasControl.canvasInControl.Add(canvas);
+                canvas.SetActive(false);
+            }
+            
         }
     }
 }
